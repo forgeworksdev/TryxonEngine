@@ -157,7 +157,9 @@ Matrix<4, 4, T> inverse(const Matrix<4, 4, T>& mat); */
 template<typename T>
 Matrix<4, 4, T> identity4x4();
 
-template<typename T>
+
+// Now on transforms
+/* template<typename T>
 Matrix<4, 4, T> translation(T x, T y, T z);
 
 template<typename T>
@@ -170,7 +172,7 @@ template<typename T>
 Matrix<4, 4, T> rotationZ(T angle);
 
 template<typename T>
-Matrix<4, 4, T> scale(T x, T y, T z);
+Matrix<4, 4, T> scale(T x, T y, T z); */
 
 ////////////////////////////////////////////////////////////////////////////////
 // DEFINITIONS
@@ -411,6 +413,8 @@ Matrix<4, 4, T> identity4x4() {
     );
 }
 
+// Now handled by transforms
+/* 
 // Translation matrix
 template<typename T>
 Matrix<4, 4, T> translation(T x, T y, T z) {
@@ -467,7 +471,7 @@ Matrix<4, 4, T> rotationZ(T angle) {
         0,  0, 1, 0,
         0,  0, 0, 1
     );
-}
+} */
 
 // Typedefs for common use
 typedef Matrix<2, 2, float> Matrix2f;

@@ -25,8 +25,8 @@
 
 */
 
-#ifndef VECTOR
-#define VECTOR
+#ifndef VECTOR_H
+#define VECTOR_H
 
 #include <abstract.hpp>
 
@@ -285,6 +285,8 @@ std::ostream& operator <<(std::ostream& out, Vector<N, T>& vector) {
     return out;
 }
 
+
+// @todo learn what the fuct is a dot product
 template <int N, typename T>
 T dot(const Vector<N, T>& left, const Vector<N, T>& right) {
     T res = left[0] * right[0];
@@ -318,4 +320,4 @@ typedef Vector<3, float> Vector3f;
 typedef Vector<4, int> Vector4i;
 typedef Vector<4, float> Vector4f;
 
-#endif      // VECTOR
+#endif      // VECTOR_H
