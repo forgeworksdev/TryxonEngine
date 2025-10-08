@@ -26,7 +26,7 @@
 ### 📥 Cloning the Repository  
 ```sh
 git clone https://github.com/forgeworksdev/tryxonengine.git
-cd project-name
+cd project-tryxonengine
 ```
 <!--
 ### 🎮 Running the Project in Godot  
