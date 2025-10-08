@@ -1,12 +1,37 @@
+// theforge.nekoweb.org
+
+//         :XXXXo;'                .;lXXXXl         
+//         cNX....                  ....KNo         
+//         ,do                          ld;         
+//         ...    .cccccc:  ;cccccc.    ...         
+//                ,NNxx0N0  kNKxxNN:                
+//                'KK. cKk  xKo  KK;                
+//                .::  .:;  ,:'  ::.                
+//              ,::::  .::::::'  ::::;              
+//                                                  
+//              cxc  ',. .xx. .,,  :xo              
+//         .'.  ,:,  ...  ::.  ..  ':;  .'.         
+//         ,xd                          lx;         
+//         cNX''..                  ..''KNo         
+//         :KKKKl;'                .;cKKKKc      
+
+// ForgeWorks
+
+// In engineering I trust.
+
+/*
+
+// Vector.h
+
+*/
+
 #ifndef VECTOR
 #define VECTOR
 
 #include <abstract.hpp>
 
-template <int N, typename T>
-
 // VectorGeneric (however many dimensions thy heart desireth)
-// @brief 
+template <int N, typename T>
 class Vector {
 public:
     T data[N];
@@ -25,8 +50,8 @@ class Vector<2, T> {
 public:
     T x, y;
 
-    Vector();
-    Vector(T x, T y);
+    Vector() : x(T()), y(T()) {}
+    Vector(T x, T y) : x(x), y(y) {}
 
     T& operator[] (size_t index);
     const T& operator[] (size_t index) const;
@@ -38,8 +63,8 @@ class Vector<3, T> {
 public:
     T x, y, z;
 
-    Vector();
-    Vector(T x, T y, T z);
+    Vector(): x(T()), y(T()), z(T()) {}
+    Vector(T x, T y, T z) : x(x), y(y), z(z) {};
 
     T& operator[] (size_t index);
     const T& operator[] (size_t index) const;
@@ -52,8 +77,8 @@ class Vector<4, T> {
 public:
     T x, y, z, w;
 
-    Vector();
-    Vector(T x, T y, T z, T w);
+    Vector(): x(T()), y(T()), z(T()), w(T()) {}
+    Vector(T x, T y, T z, T w) : x(x), y(y), z(z), w(w) {};
 
     T& operator[] (size_t index);
     const T& operator[] (size_t index) const;
@@ -94,6 +119,8 @@ T dot(const Vector<N, T>& left, const Vector<N, T>& right);
 template <typename T>
 Vector<3, T> cross(Vector<3, T> left, Vector<3, T> right);
 
+
+
 ////////////////////////////////////////////////////////////////////////////////
 // DEFINITIONS
 ///////////////////////////////////////////////////////////////////////////////
@@ -101,16 +128,22 @@ Vector<3, T> cross(Vector<3, T> left, Vector<3, T> right);
 // Constructor implementations
 
 template <int N, typename T>
-Vector<N, T>::Vector() {}
+Vector<N, T>::Vector() {
+    for (int i = 0; i < N; i++) {
+        data[i] = T();
+    }
+}
+
+
+/* 
+template <typename T>
+Vector<2, T>::Vector() : x(T()), y(T()) {}
 
 template <typename T>
-Vector<2, T>::Vector() {}
+Vector<3, T>::Vector() : x(T()), y(T()), z(T()) {}
 
 template <typename T>
-Vector<3, T>::Vector() {}
-
-template <typename T>
-Vector<4, T>::Vector() {}
+Vector<4, T>::Vector() : x(T()), y(T()), z(T()), w(T()) {}
 
 
 template <typename T>
@@ -132,7 +165,7 @@ Vector<4, T>::Vector(T X, T Y, T Z, T W) {
     y = Y;
     z = Z;
     w = W;
-}
+} */
 
 // Vector from C-style array definition
 
@@ -147,13 +180,13 @@ Vector<N, T>::Vector(const T d[]) {
 
 template <int N, typename T>
 T& Vector<N, T>::operator[](size_t index) {
-    assert(index >= 0 && index < N);
+    assert(index < N);  // ← CORRECT
     return data[index];
 }
 
 template <int N, typename T>
 const T& Vector<N, T>::operator[](size_t index) const {
-    assert(index >= 0 && index < N);
+    assert(index < N);
     return data[index];
 }
 
@@ -236,7 +269,7 @@ Vector<N, T> operator *(T lhs, const Vector<N, T>& rhs) {
 }
 
 template <int N, typename T>
-Vector<N, T> operator/(const Vector<N, T>& lhs, const T& rhs) {
+Vector<N, T> operator /(const Vector<N, T>& lhs, const T& rhs) {
     Vector<N, T> tmp;
     for (int i = 0; i < N; i++) tmp[i] = lhs[i]/rhs;
     return tmp;
@@ -244,9 +277,9 @@ Vector<N, T> operator/(const Vector<N, T>& lhs, const T& rhs) {
 
 template <int N, typename T>
 std::ostream& operator <<(std::ostream& out, Vector<N, T>& vector) {
-    out << "( " << vector[0];
+    out << "(" << vector[0];
     for (int i = 1; i < N; i++) {
-        out << ",\t" << vector[i];
+        out << ", " << vector[i];
     }
     out << ")";
     return out;
@@ -267,7 +300,6 @@ Vector<3, T> cross(Vector<3, T> left, Vector<3, T> right) {
         left[0] * right[1] - right[0] * left[1]
     );
 }
-
 
 template <typename T>
 Vector<3, T> normalize(const Vector<3, T>& vec) {

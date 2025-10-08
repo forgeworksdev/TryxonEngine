@@ -11,10 +11,11 @@
 #include <functional>
 #include <set>
 #include <unordered_set>
-#include <deque> //pilha bidirecional
+#include <deque>
 
 #include <cstdio>
 #include <cassert>
+//#include <cstddeff>
 
 #include <iostream>
 #include <iomanip>
